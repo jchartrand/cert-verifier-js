@@ -182,6 +182,12 @@ export default class Verifier {
       inspectors.ensureValidReceipt(this.receipt)
     );
 
+	  // Check issuer identity
+	  this._doAction(SUB_STEPS.checkIssuerIdentity, () =>
+		  inspectors.ensureIssuerIdentity(this.issuer.id)
+	  );
+
+
     // Check revoked status
     let keys;
     let revokedAddresses;

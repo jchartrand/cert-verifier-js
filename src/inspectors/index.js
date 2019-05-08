@@ -4,6 +4,7 @@ import ensureIssuerSignature from './ensureIssuerSignature';
 import ensureMerkleRootEqual from './ensureMerkleRootEqual';
 import ensureNotExpired from './ensureNotExpired';
 import ensureNotRevoked from './ensureNotRevoked';
+import ensureIssuerIdentity from './ensureIssuerIdentity';
 import ensureValidIssuingKey from './ensureValidIssuingKey';
 import ensureValidReceipt from './ensureValidReceipt';
 import isTransactionIdValid from './isTransactionIdValid';
@@ -15,6 +16,7 @@ export {
   ensureMerkleRootEqual,
   ensureNotExpired,
   ensureNotRevoked,
+	ensureIssuerIdentity,
   ensureValidIssuingKey,
   ensureValidReceipt,
   isTransactionIdValid

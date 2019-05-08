@@ -14,6 +14,8 @@ const checkAuthenticity = 'checkAuthenticity';
 const checkRevokedStatus = 'checkRevokedStatus';
 const checkExpiresDate = 'checkExpiresDate';
 
+const checkIssuerIdentity = 'checkIssuerIdentity';
+
 function getTextFor (subStep, status) {
   return i18n['en-US'].subSteps[`${subStep}${status}`];
 }
@@ -24,7 +26,7 @@ const LABEL_PENDING = 'LabelPending';
 const subStepsMap = {
   [STEPS.formatValidation]: [getTransactionId, computeLocalHash, fetchRemoteHash, getIssuerProfile, parseIssuerKeys],
   [STEPS.hashComparison]: [compareHashes, checkMerkleRoot, checkReceipt],
-  [STEPS.statusCheck]: [checkIssuerSignature, checkAuthenticity, checkRevokedStatus, checkExpiresDate]
+  [STEPS.statusCheck]: [checkIssuerIdentity, checkIssuerSignature, checkAuthenticity, checkRevokedStatus, checkExpiresDate]
 };
 
 function generateSubsteps (parentKey) {
@@ -52,6 +54,7 @@ export {
   compareHashes,
   checkMerkleRoot,
   checkReceipt,
+    checkIssuerIdentity,
   checkIssuerSignature,
   checkAuthenticity,
   checkRevokedStatus,

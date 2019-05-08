@@ -8,6 +8,8 @@ import { NETWORKS } from './networks';
 import CONFIG from './config';
 import CONTEXTS from './contexts';
 import { DEFAULT_OPTIONS } from './options';
+import {REGISTERED_ISSUER_IDENTITIES} from "./issuerIdentities";
+
 
 export {
   API_URLS,
@@ -19,5 +21,6 @@ export {
   NETWORKS,
   STEPS,
   SUB_STEPS,
-  VERIFICATION_STATUSES
+  VERIFICATION_STATUSES,
+	REGISTERED_ISSUER_IDENTITIES
 };

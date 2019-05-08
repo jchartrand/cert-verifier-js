@@ -12,6 +12,7 @@ const versionVerificationMap = {
     SUB_STEPS.compareHashes,
     SUB_STEPS.checkMerkleRoot,
     SUB_STEPS.checkReceipt,
+	  SUB_STEPS.checkIssuerIdentity,
     SUB_STEPS.checkRevokedStatus,
     SUB_STEPS.checkAuthenticity,
     SUB_STEPS.checkExpiresDate
