@@ -1,9 +1,10 @@
-import { STEPS, SUB_STEPS, VERIFICATION_STATUSES } from './constants';
+import {ISSUER_IDENTITY_REGISTRY, STEPS, SUB_STEPS, VERIFICATION_STATUSES} from './constants';
 import debug from 'debug';
 import CERTIFICATE_VERSIONS from './constants/certificateVersions';
 import VerifierError from './models/verifierError';
 import domain from './domain';
 import * as inspectors from './inspectors';
+import {getRegisteredIssuerIds} from "./domain/verifier/useCases";
 
 const log = debug('Verifier');
 
@@ -160,7 +161,6 @@ export default class Verifier {
       SUB_STEPS.getIssuerProfile,
       async () => domain.verifier.getIssuerProfile(this.issuer.id)
     );
-
     // Parse issuer keys
     let issuerKeyMap = await this._doAsyncAction(
       SUB_STEPS.parseIssuerKeys,
@@ -182,9 +182,16 @@ export default class Verifier {
       inspectors.ensureValidReceipt(this.receipt)
     );
 
+
+	  // Get registered issuers
+	  let registeredIssuerIds = await this._doAsyncAction(
+		  SUB_STEPS.getRegisteredIssuerIds,
+		  async () => domain.verifier.getRegisteredIssuerIds(ISSUER_IDENTITY_REGISTRY)
+	  );
+
 	  // Check issuer identity
 	  this._doAction(SUB_STEPS.checkIssuerIdentity, () =>
-		  inspectors.ensureIssuerIdentity(this.issuer.id)
+		  inspectors.ensureIssuerIdentity(this.issuer.id, registeredIssuerIds)
 	  );
 
 

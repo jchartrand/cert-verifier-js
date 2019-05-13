@@ -33,18 +33,19 @@
       "checkRevokedStatusLabelPending": "Checking Revoked Status",
       "checkExpiresDateLabel": "Check Expiration Date",
       "checkExpiresDateLabelPending": "Checking Expiration Date",
-
-      "checkIssuerIdentityLabel": "Check Issuer Identity",
-      "checkIssuerIdentityLabelPending": "Checking Issuer Identity"
+      "getRegisteredIssuerIdsLabel": "Get list of registered issuers.",
+      "getRegisteredIssuerIdsLabelPending": "Getting list of registered issuers.",
+      "checkIssuerIdentityLabel": "Check Credential was Issued by McMaster University",
+      "checkIssuerIdentityLabelPending": "Checking Credential was Issued by McMaster University"
 
     },
     "revocation": {
       "preReason": "Reason given:",
-      "reason": "This certificate has been revoked by the issuer."
+      "reason": "This credential has been revoked by McMaster University."
     },
     "success": {
       "mocknet": "This mock Blockcert passed all checks. Mocknet mode is only used for issuers to test their workflow locally. This Blockcert was not recorded on a blockchain, and it should not be considered a verified Blockcert.",
-      "blockchain": "Success"
+      "blockchain": "This is a valid credential, issued by McMaster University."
     },
     "errors": {
       "certificateNotValid": "This is not a valid certificate",
@@ -74,7 +75,8 @@
       "ensureValidReceipt": "The receipt is malformed. There was a problem navigating the merkle tree in the receipt.",
       "invalidMerkleReceipt": "Invalid Merkle Receipt. Proof hash did not match Merkle root",
       "isTransactionIdValid": "Cannot verify this certificate without a transaction ID to compare against.",
-      "ensureIssuerIdentity": "This credential was NOT issued by McMaster.  It is from another institution or fake."
+      "ensureIssuerIdentity": "McMaster University does not recognize this credential.   For validation of credentials not issued by McMaster please visit https://www.blockcerts.org.  For questions about McMaster credentials, please contact the Office of the Registrar.",
+      "getRegisteredIssuerIds": "Failed to find the issuer registry.  This might a network error.  Please try again or contact the office of the Registrar."
     }
   },
   "es-ES": {
