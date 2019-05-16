@@ -45,7 +45,7 @@
     },
     "success": {
       "mocknet": "This mock Blockcert passed all checks. Mocknet mode is only used for issuers to test their workflow locally. This Blockcert was not recorded on a blockchain, and it should not be considered a verified Blockcert.",
-      "blockchain": "This is a valid credential, issued by McMaster University."
+      "blockchain": "This is a valid credential issued by McMaster University."
     },
     "errors": {
       "certificateNotValid": "This is not a valid certificate",
