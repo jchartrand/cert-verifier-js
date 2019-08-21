@@ -103,28 +103,30 @@ The certificate instance has the following properties:
 - `certificateJson`: `Object`. Certificate JSON object
 - `chain`: `Object`. Chain the certificate was issued on
 - `description`: `String`. Description of the certificate
-- `expires`: `String`. Expiration date
+- `expires`: `String|null`. Expiration date
 - `id`: `String`. Certificate's ID
 - `isFormatValid`: `Boolean`. Indicates whether or not the certificate has a valid format
 - `issuedOn`: `String`. Datetime of issuance (ISO-8601)
 - `issuer`: `Object`. Certificate issuer
 - `locale`: `String`. Language code used by the verifier
-- `metadataJson`: `Object`. Certificate metadata object
+- `metadataJson`: `Object|null `. Certificate metadata object
 - `name`: `String`. Name of the certificate
 - `publicKey`: `String`. Certificate's public key
-- `receipt`: `String`. Certificate's receipt
+- `receipt`: `Object`. Certificate's receipt
 - `recipientFullName`: `String`. Full name of recipient
 - `recordLink`: `String`. Link to the certificate record
 - `revocationKey`: `String|null`. Revocation key (if any)
 - `sealImage`: `String`. Raw data of the seal's image;
-- `signature`: `String`. Certificate's signature
-- `signatureImage`: `String`. Raw data of the certificate's signature image;
-- `subtitle`: `String`. Subtitle of the certificate
+- `signature`: `String|null`. Certificate's signature
+- `signatureImage`: [`SignatureImage[]`][signatureLineModel]. Array of certificate [signature lines][signatureLineModel].
+- `subtitle`: `String|null`. Subtitle of the certificate
 - `transactionId`: `String`. Transaction ID
 - `rawTransactionLink`: `String`. Raw transaction ID
 - `transactionLink`: `String`. Transaction link
 - `verificationSteps`: `VerificationStep[]`. The array of steps the certificate will have to go through during verification
 - `version`: `CertificateVersion`. [Version of the certificate](https://github.com/blockchain-certificates/cert-verifier-js/blob/master/src/constants/certificateVersions.js)
+
+[signatureLineModel]: src/models/signatureImage.js
 
 **Note:** `verificationSteps` is generated according to the nature of the certificate. The full steps array is provided ahead of verification in order to give more flexibility to the consumer. For example, you might want to pre-render the verification steps for animation, or render a count of steps and/or sub-steps.
 
@@ -153,7 +155,7 @@ This will run the verification of a certificate. The function is asynchronous.
 const certificateVerification = await certificate.verify(({code, label, status, errorMessage}) => {
     console.log('Sub step update:', code, label, status);
 }));
-console.log(`Verification was a ${certificateVerification.status}:`, certificateVerification.errorMessage);
+console.log(`Verification was a ${certificateVerification.status}:`, certificateVerification.message);
 ```
 
 #### Parameters
@@ -166,11 +168,16 @@ console.log(`Verification was a ${certificateVerification.status}:`, certificate
 #### Returns
 The final verification status:
 ```javascript
-{ code, status, errorMessage }
+{ code, status, message }
 ```
 - `code`: code of the final step (`final`)
 - `status`: final verification status (`success`, `failure`)
-- `errorMessage`: error message (optional)
+- `message` string | Object: status message. It is internationalized and in case of failure it returns the error message of the failed step. When an object, it takes the following shape:
+  - `label`: Main label of the final step
+  - `description`: further details about the issuance
+  - `linkText`: translation provided for a link text towards the transaction
+
+Shape of the returned object can be checked here: https://github.com/blockchain-certificates/cert-verifier-js/blob/master/src/data/i18n.json#L41
 
 ### Constants
 Several constants are being exposed:

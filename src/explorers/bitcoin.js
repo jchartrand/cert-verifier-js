@@ -13,7 +13,7 @@ export function getBlockcypherFetcher (transactionId, chain) {
     blockCypherUrl = API_URLS.blockCypherTestUrl + transactionId + '?limit=500';
   }
   let blockcypherFetcher = new Promise((resolve, reject) => {
-    return request({url: blockCypherUrl})
+    return request({ url: blockCypherUrl })
       .then(function (response) {
         const responseData = JSON.parse(response);
         try {
@@ -40,7 +40,7 @@ export function getChainSoFetcher (transactionId, chain) {
   }
 
   let chainSoFetcher = new Promise((resolve, reject) => {
-    return request({url: chainSoUrl})
+    return request({ url: chainSoUrl })
       .then(function (response) {
         const responseData = JSON.parse(response);
         try {
@@ -60,7 +60,7 @@ export function getChainSoFetcher (transactionId, chain) {
 
 function parseBlockCypherResponse (jsonResponse) {
   if (jsonResponse.confirmations < CONFIG.MininumConfirmations) {
-    throw new VerifierError(getText('errors', 'parseBlockCypherResponse'));
+    throw new VerifierError(SUB_STEPS.fetchRemoteHash, getText('errors', 'parseBlockCypherResponse'));
   }
   const time = dateToUnixTimestamp(jsonResponse.received);
   const outputs = jsonResponse.outputs;
@@ -80,7 +80,7 @@ function parseBlockCypherResponse (jsonResponse) {
 
 function parseChainSoResponse (jsonResponse) {
   if (jsonResponse.data.confirmations < CONFIG.MininumConfirmations) {
-    throw new VerifierError(getText('errors', 'parseChainSoResponse'));
+    throw new VerifierError(SUB_STEPS.fetchRemoteHash, getText('errors', 'parseChainSoResponse'));
   }
   const time = new Date(jsonResponse.data.time * 1000);
   const outputs = jsonResponse.data.outputs;
